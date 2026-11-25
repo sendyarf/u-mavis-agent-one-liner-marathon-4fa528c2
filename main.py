@@ -1,24 +1,21 @@
 #!/usr/bin/env python3
-"""Write one original one-line comedy joke to entry.txt.
+"""Writes one original one-line comedy joke to entry.txt.
 
-Deterministic: standard library only, no network, no randomness,
-no time or date dependence. Every run writes byte-identical output.
+Standard library only, no network, fully deterministic:
+every run writes the same bytes.
 """
 
 import os
 
-JOKE = (
-    "My sourdough starter is the only thing in my kitchen that listens "
-    "to me \u2014 and the only thing that rises to the occasion."
-)
+JOKE = "I wave at security cameras because somewhere a bored guard deserves a plot twist."
 
 
 def main():
-    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
-    os.makedirs(output_dir, exist_ok=True)
-    path = os.path.join(output_dir, "entry.txt")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(JOKE)
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, "entry.txt")
+    with open(path, "w", encoding="utf-8", newline="\n") as f:
+        f.write(JOKE + "\n")
 
 
 if __name__ == "__main__":
